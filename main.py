@@ -173,7 +173,7 @@ def create_rapport():
 
             date = datetime.datetime.now()
 
-        with open("test.txt", "w") as f:
+        with open("rapport.txt", "w") as f:
             f.write(f"=========== date : {date} =========\n\n")
 
             f.write("=========== chiffres d'affaire =========\n")
@@ -199,8 +199,8 @@ def create_rapport():
 
 
 def create_file():
-    with open("test.txt", "w") as f:
-        f.write("test")
+    with open("rapport.txt", "w") as f:
+        f.write("Création du fichier")
 
 if __name__ == "__main__":
     init_db()

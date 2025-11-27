@@ -8,11 +8,18 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     restart: always
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-ecommerce:/var/lib/postgresql
+      - ./sql-init:/docker-entrypoint-initdb.d
     ports:
       - 8023:5432
     networks:
       - db_network_ecommerce
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+      timeout: 3s
 
   pgadmin-ecommerce:
     image: dpage/pgadmin4
@@ -37,8 +44,11 @@ services:
       - 8825:5000
     networks:
       - db_network_ecommerce
+    volumes:
+      - ./rapport:/home/thierry/rapport
 
 volumes:
+  postgres-ecommerce:
   pgadmin-data-ecommerce:
 
 networks:

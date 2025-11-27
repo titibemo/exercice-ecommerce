@@ -1,5 +1,10 @@
 import psycopg
 import datetime
+import os
+
+date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+local_directory = "/home/thierry/rapport"
+file_name = os.path.join(local_directory, f"rapport-{date}.txt")
 
 DSN = "dbname=postgres-ecommerce user=tata password=secret host=postgres-ecommerce port=5432"
 
@@ -37,38 +42,39 @@ def create_rapport():
             """)
             chiffre_affaire_par_moi = cur.fetchall()
 
-            date = datetime.datetime.now()
 
-        with open("rapport.txt", "w") as f:
-            f.write(f"=========== date : {date} =========\n\n")
+        with open(file_name, "w") as f:
+            os.makedirs(local_directory, exist_ok=True)  # s'assure que le dossier existe
 
-            f.write("=========== chiffres d'affaire =========\n")
-            for chiffres_affaire in chiffres_affaires:
-                f.write(str(chiffres_affaire) + "\n")
-            f.write("\n")
+            with open(file_name, "w") as f:
+                f.write(f"=========== date : {date} =========\n\n")
 
-            f.write("=========== panier moyen =========\n")
-            for panier_moyen in panier_moyens:
-                f.write(str(panier_moyen) + "\n")
-            f.write("\n")
+                f.write("=========== chiffres d'affaire =========\n")
+                for chiffres_affaire in chiffres_affaires:
+                    f.write(str(chiffres_affaire) + "\n")
+                f.write("\n")
 
-            f.write("=========== total par catégorie =========\n")
-            for total in total_by_category:
-                f.write(str(total) + "\n")
-            f.write("\n")
+                f.write("=========== panier moyen =========\n")
+                for panier_moyen in panier_moyens:
+                    f.write(str(panier_moyen) + "\n")
+                f.write("\n")
 
-            f.write("=========== total par mois =========\n")
-            for mois in chiffre_affaire_par_moi:
-                f.write(str(mois) + "\n")
+                f.write("=========== total par catégorie =========\n")
+                for total in total_by_category:
+                    f.write(str(total) + "\n")
+                f.write("\n")
+
+                f.write("=========== total par mois =========\n")
+                for mois in chiffre_affaire_par_moi:
+                    f.write(str(mois) + "\n")
 
 
 
 
 def create_file():
-    with open("rapport.txt", "w") as f:
+    os.makedirs("/home/thierry/rapport", exist_ok=True)
+    with open("/home/thierry/rapport/rapport.txt", "w") as f:
         f.write("Création du fichier")
 
 if __name__ == "__main__":
-    # init_db()
-    create_file()
     create_rapport()

@@ -7,7 +7,7 @@ Ce projet à pour but Analyse des ventes d’un site e-commerce. Nous nous servi
 Pour copier le projet utiliser la commande :
 
 ```bash
-git https://github.com/titibemo/exercice-ecommerce
+git clone https://github.com/titibemo/exercice-ecommerce
 ```
 
 Dans le docker compose, un .env DOIT ETRE ajouter afin de faire fonctionner le projet,  pour cela créer un fichier .env et ajouter les variables d'environnements suivantes :

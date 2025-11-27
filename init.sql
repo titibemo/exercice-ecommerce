@@ -1,4 +1,6 @@
-DROP DATABASE IF EXISTS postgres-ecommerce;
+-- DROP DATABASE IF EXISTS "postgres-ecommerce";
+-- CREATE DATABASE "postgres-ecommerce"
+
 -- PARTIE 1
 ALTER TABLE IF EXISTS products DROP CONSTRAINT IF EXISTS fk_id_category;
 ALTER TABLE IF EXISTS orders DROP CONSTRAINT IF EXISTS fk_id_customer;
